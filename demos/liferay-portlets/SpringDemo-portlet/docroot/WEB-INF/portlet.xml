@@ -9,7 +9,7 @@
 		<init-param>
 			<name>contextConfigLocation</name>
 			<value>
-				/WEB-INF/context/springContextConfig.xml
+				/WEB-INF/context/portlet/servletContext.xml
 			</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
