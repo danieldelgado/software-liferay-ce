@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir")" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+
+	$theme.include($top_head_include)
+</head>
+
+<body class="$css_class">
+
+$theme.include($body_top_include)
+
+#if ($is_signed_in)
+	#dockbar()
+#end
+
+<div id="wrapper" class="main">
+	##<a href="#main-content" id="skip-to-content">#language("skip-to-content")</a>
+
+	<header id="banner" role="banner">
+	
+		<div class="logo">
+	        <a href="$custom_url_home" title="GtelCom - Soluciones en comunicaciones IP">
+	            <img src="/telcom-theme/images/tel/logoGtelCom.jpg" alt="GtelCom"/>
+	        </a>
+	    </div>
+	    
+		<div class="opciones">
+          <ul>
+          	##<li><a href="servicio-al-cliente" title="Servicio al cliente Interbank" ><img src="/telcom-theme/images/tel/logoGtelCom.jpg" alt="GtelCom"/>Servicio al cliente</a>|</li>
+            ##<li><a href="promociones" title="Promociones" ><img src="/telcom-theme/images/tel/logoGtelCom.jpg" alt="GtelCom"/>Promociones</a>|</li>
+            ##<li><a href="contactanos" title="Cont&aacute;ctanos" ><img src="/telcom-theme/images/tel/logoGtelCom.jpg" alt="GtelCom"/>Cont&aacute;ctanos</a>|</li>
+            <li style="display:inline;"><a href="#" title="Home" ><img src="/telcom-theme/images/tel/home.jpg" class="iconosHome" alt="Home"/>Home</a></li>
+            <li style="display:inline;"><a href="#" title="Login" ><img src="/telcom-theme/images/tel/login.jpg" class="iconosHome" alt="Login"/>Login</a></li>
+            <li style="display:inline;"><a href="#" title="Faqs" ><img src="/telcom-theme/images/tel/busqueda.jpg" class="iconosHome" alt="Faqs"/>Faqs</a></li>
+          </ul>
+         </div>
+
+		#if (!$is_signed_in)
+			<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+		#end
+
+		##if ($has_navigation || $is_signed_in)
+		##parse ("$full_templates_path/navigation.vm")
+		##end
+	</header>
+
+	<div id="content">
+		##<nav class="site-breadcrumbs" id="breadcrumbs">
+			##<h1>
+			##	<span>#language("breadcrumbs")</span>
+			##</h1>
+
+			###breadcrumbs()
+		##</nav>
+
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+
+	<footer id="footer" role="contentinfo">
+		<p class="powered-by">
+			#language("powered-by") <a href="http://www.liferay.com" rel="external">Liferay</a>
+		</p>
+	</footer>
+</div>
+
+$theme.include($body_bottom_include)
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>
