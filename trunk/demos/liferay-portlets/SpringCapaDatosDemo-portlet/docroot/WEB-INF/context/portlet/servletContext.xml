@@ -1,74 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <beans xmlns="http://www.springframework.org/schema/beans"  
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xmlns:context="http://www.springframework.org/schema/context"  
-        xsi:schemaLocation="
-        http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
-         http://www.springframework.org/schema/context 
-         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-          
-      <!-- Para que Spring sepa que vamos a usar anotaciones -->  
-     <context:annotation-config />  
-   
-     <!-- Desde donde tiene que escanear -->  
-    <context:component-scan base-package="com.vst.spring" /> 
-    
-    
-        <bean id="portletModeHandlerMapping"  
-            class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">  
-            <property name="portletModeMap">  
-                <map>  
-                    <entry key="VIEW" value-ref="controller" />  
-               </map>  
-           </property>  
-       </bean>  
-     
-      <bean id="controller" class="com.vst.spring.demo.SpringDemoController">
-      </bean>
-     
-       <!-- Default View Resolver -->  
-       <bean id="viewResolver"  
-           class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-         
-          <property name="cache" value="false" />  
-           <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />  
-           <property name="prefix" value="/html/springdemocontroller/" />  
-           <property name="suffix" value=".jsp" />   
-         
-            <!--  
-            <property name="mediaTypes">
-			<map>
-				<entry key="html" value="text/html" />
-				<entry key="json" value="application/json" />
-			</map>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        ">
+	<context:component-scan base-package="com.vst.spring" />
+
+	<context:annotation-config />
+	
+	<mvc:annotation-driven />
+	
+<!--         http://www.springframework.org/schema/aop -->
+<!--         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd -->
+	<jee:jndi-lookup jndi-name="java:comp/env/jdbc/OrderDB"
+		id="dataSource" />
+		
+		
+<!-- 		<jee:jndi-lookup id="dataSource" -->
+<!-- 		jndi-name="java:comp/env/jdbc/OrderDB" -->
+<!-- 		cache="true" -->
+<!-- 		resource-ref="true" -->
+<!-- 		lookup-on-startup="false" -->
+<!-- 		proxy-interface="javax.sql.DataSource"/> -->
+
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="OrderPU" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+<!-- 				<property name="databasePlatform" -->
+<!-- 					value="org.eclipse.persistence.platform.database.MySQLPlatform" /> -->
+			</bean>
 		</property>
-		<property name="viewResolvers">
-			<list>
-				<bean
-					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-					<property name="prefix" value="/WEB-INF/views/" />
-					<property name="suffix" value=".jsp" />
-				</bean>
-			</list>
-		</property>
-		<property name="defaultViews">
-			<list>
-				<bean
-					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-			</list>
-		</property>
-             -->
-           
-       </bean>  
-     
-     
-     
-    
-     
-     
-     
-     
-     
-     
-   </beans>  
+<!-- 		<property name="loadTimeWeaver"> -->
+<!-- 			<bean -->
+<!-- 				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="jpaDialect"> -->
+<!-- 			<bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect" /> -->
+<!-- 		</property> -->
+
+	</bean>
+
+	<!-- Add Transaction support -->
+	<bean id="myTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Use @Transaction annotations for managing transactions -->
+	<tx:annotation-driven transaction-manager="myTxManager" />
+
+</beans>
