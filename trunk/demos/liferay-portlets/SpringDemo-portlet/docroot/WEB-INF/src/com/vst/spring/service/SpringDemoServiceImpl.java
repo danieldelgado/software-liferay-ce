@@ -16,6 +16,7 @@ public class SpringDemoServiceImpl implements SpringDemoService {
 
 	@Override
 	public String hello() {
+	
 		log.info(" SpringDemoServiceImpl ");
 		return "holaaaaa :D";
 	}
