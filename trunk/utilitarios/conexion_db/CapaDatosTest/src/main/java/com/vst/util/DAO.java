@@ -24,7 +24,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	protected Query q = null;
 
 	static {
-		emf = DAOConexionUtil.entityManagerFactory();
+		emf = DAOConexionUtil.getEntityManagerFactory();
 		em = emf.createEntityManager();
 		log.info("createEntityManagerFactory");
 	}
