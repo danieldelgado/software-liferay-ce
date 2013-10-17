@@ -16,9 +16,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class DAO<T extends Entidad> implements IDAO<T> {
 
 	private static Log log = LogFactoryUtil.getLog(DAO.class);
-	protected static EntityManagerFactory emf;
-	protected static EntityManager em;
-	protected static EntityTransaction entityTransaction;
+	private static EntityManagerFactory emf;
+	private static EntityManager em;
+	private static EntityTransaction entityTransaction;
 	private Class<Entidad> clazz;
 	protected String sqlQuery = null;
 	protected Query q = null;

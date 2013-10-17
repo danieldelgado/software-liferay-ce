@@ -6,16 +6,23 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 public class DAOConexionUtil {
 
+	private static Log log = LogFactoryUtil.getLog(DAO.class);
+	
 	public static EntityManagerFactory getEntityManagerFactory(){
 		int context = Config.getPropiedadInt("persistence.jndi.conextion");
 		EntityManagerFactory emf = null;
 		if(context == Constantes.INICIAR_JDNI_CONTEXT){
 			emf = entityManagerFactoryContext();
+			log.info("getEntityManagerFactory INICIAR_JDNI_CONTEXT");
 		}else
 		if(context == Constantes.INICIAR_TEST){
 			emf = entityManagerFactory();
+			log.info("getEntityManagerFactory INICIAR_TEST");
 		}
 		return emf;
 	}	
