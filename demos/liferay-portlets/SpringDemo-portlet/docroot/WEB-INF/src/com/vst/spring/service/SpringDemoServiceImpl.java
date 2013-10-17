@@ -4,11 +4,11 @@ import org.springframework.stereotype.Service;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.vst.capa.dao.DAOLayer;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.TraductorDeExcepciones;
 import com.vst.util.Util;
+import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
 
 /**
  * Portlet implementation class SpringDemoController
@@ -19,7 +19,7 @@ public class SpringDemoServiceImpl implements SpringDemoService {
 
 	private static Log log = LogFactoryUtil.getLog(SpringDemoServiceImpl.class);
 
-	UsuarioDAO usuarioDAO = DAOLayer.getInstanceDAOLayer().getUsuarioDAOImpl();
+	UsuarioDAO usuarioDAO = getInstanceDAOLayer().getUsuarioDAOImpl();
 	
 	@Override
 	public String hello() {
