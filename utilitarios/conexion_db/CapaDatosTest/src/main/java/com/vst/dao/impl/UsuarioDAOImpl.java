@@ -7,11 +7,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.DAO;
-//import org.springframework.stereotype.Repository;
 
 public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 
-//	private static final Logger logger = LoggerFactory.getLogger(UsuarioDAOImpl.class);
 	private static Log logger = LogFactoryUtil.getLog(UsuarioDAOImpl.class);
 	
 	@SuppressWarnings("unchecked")
@@ -34,7 +32,6 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 	@SuppressWarnings("unchecked")
 	public Usuario buscarUsuario(String userName) {
 		if(userName!=null&&userName.length()>0){
-			logger.info("em.isOpen(): " + em.isOpen());
 			sqlQuery = "select  new Usuario(u.id, u.userName, u.clave, u.nombre, u.apellido)  from Usuario u where u.userName=:userName";
 			q = getEntityManager().createQuery(sqlQuery);
 			logger.info("buscando usuario por username "+userName);

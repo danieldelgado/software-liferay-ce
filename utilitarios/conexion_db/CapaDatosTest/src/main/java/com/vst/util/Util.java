@@ -1,9 +1,13 @@
 package com.vst.util;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import com.google.gson.Gson;
 
 //import com.google.gson.Gson;
 
@@ -25,21 +29,21 @@ public class Util {
 		return r.nextInt(limit);
 	}
 	
-//	public static String getJsonObject(Entidad entidad) {
-//		Gson gson = new Gson();
-//		String gsonString = gson.toJson(entidad);
-//		return "{" + entidad.getClass().getSimpleName() + ":[" + gsonString + "]}";
-//	}
+	public static String getJsonObject(Entidad entidad) {
+		Gson gson = new Gson();
+		String gsonString = gson.toJson(entidad);
+		return "{" + entidad.getClass().getSimpleName() + ":[" + gsonString + "]}";
+	}
 
-//	public static String getJson(Object... ob) {
-//		List l = new ArrayList();
-//		for (int i = 0; i < ob.length; i++) {
-//			Object o = ob[i];
-//			l.add(o);
-//		}
-////		Gson gson = new Gson();
-//		return gson.toJson(l);
-//	}
+	public static String getJson(Object... ob) {
+		List l = new ArrayList();
+		for (int i = 0; i < ob.length; i++) {
+			Object o = ob[i];
+			l.add(o);
+		}
+		Gson gson = new Gson();
+		return gson.toJson(l);
+	}
 
 	public static boolean vacio(String cadena) {
 		return cadena == null || cadena.equals("");
@@ -59,27 +63,27 @@ public class Util {
 	 * return result; }
 	 */
 
-//	public static List<Integer> generateCollection(String campo, List list) {
-//		System.out.println(list);
-//		List<Integer> result = new ArrayList<Integer>();
-//		try {
-//			if (list == null || list.isEmpty()) {
-//				result.add(0);
-//				return result;
-//			}
-//			for (Iterator it = list.iterator(); it.hasNext();) {
-//				Object obentidad = it.next();
-//				Class c = obentidad.getClass();
-//				Method myMethod;
-//				myMethod = c.getMethod("getId", null);
-//				int r = (Integer) myMethod.invoke(obentidad, null);
-//				result.add(r);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	public static List<Integer> generateCollection(String campo, List list) {
+		System.out.println(list);
+		List<Integer> result = new ArrayList<Integer>();
+		try {
+			if (list == null || list.isEmpty()) {
+				result.add(0);
+				return result;
+			}
+			for (Iterator it = list.iterator(); it.hasNext();) {
+				Object obentidad = it.next();
+				Class c = obentidad.getClass();
+				Method myMethod;
+				myMethod = c.getMethod("getId", null);
+				int r = (Integer) myMethod.invoke(obentidad, null);
+				result.add(r);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public static boolean isNotNull(Object u) {
 		if (u != null) {
