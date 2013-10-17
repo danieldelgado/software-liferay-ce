@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import static com.vst.util.DAOConexionUtil.getEntityManagerFactory;
 
 @SuppressWarnings("unchecked")
 public class DAO<T extends Entidad> implements IDAO<T> {
@@ -24,8 +25,8 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	protected Query q = null;
 
 	static {
-		emf = DAOConexionUtil.getEntityManagerFactory();
-		em = emf.createEntityManager();
+		emf = getEntityManagerFactory();
+		em  = emf.createEntityManager();
 		log.info("static createEntityManagerFactory");
 	}
 	
