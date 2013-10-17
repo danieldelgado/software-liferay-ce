@@ -20,12 +20,12 @@ public final class DAOLayer {
 	}
 	
 	public static DAOLayer getInstanceDAOLayer(){
-		log.info("obtener DAOLayer:"+daoLayer);
+		log.info("getInstanceDAOLayer DAOLayer:"+daoLayer);
 		return daoLayer;
 	}
 	
 	public UsuarioDAO getUsuarioDAOImpl(){
-		log.info("obtener UsuarioDAO:"+usuarioDAO);
+		log.info("getUsuarioDAOImpl UsuarioDAO:"+usuarioDAO);
 		return usuarioDAO;
 	}
 	

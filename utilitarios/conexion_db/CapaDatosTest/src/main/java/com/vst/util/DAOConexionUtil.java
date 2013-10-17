@@ -8,13 +8,15 @@ import javax.persistence.Persistence;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import static com.vst.util.Config.getPropiedad;
+import static com.vst.util.Config.getPropiedadInt;
 
 public class DAOConexionUtil {
 
 	private static Log log = LogFactoryUtil.getLog(DAO.class);
 	
 	public static EntityManagerFactory getEntityManagerFactory(){
-		int context = Config.getPropiedadInt("persistence.jndi.conextion");
+		int context = getPropiedadInt("persistence.jndi.conextion");
 		EntityManagerFactory emf = null;
 		if(context == Constantes.INICIAR_JDNI_CONTEXT){
 			emf = entityManagerFactoryContext();
@@ -28,17 +30,17 @@ public class DAOConexionUtil {
 	}	
 	
 	public static EntityManagerFactory entityManagerFactory() {
-		String puName = Config.getPropiedad("persistence.name");
+		String puName = getPropiedad("persistence.name");
 		Map<String, Object> properties = new HashMap<String, Object>();
-		properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-		properties.put("javax.persistence.jdbc.url", "jdbc:mysql://192.168.1.219:3306/chathsd");
-		properties.put("javax.persistence.jdbc.user", "root");
-		properties.put("javax.persistence.jdbc.password", "root");			
+		properties.put("javax.persistence.jdbc.driver", getPropiedad("javax.persistence.jdbc.driver"));
+		properties.put("javax.persistence.jdbc.url", getPropiedad("javax.persistence.jdbc.url"));
+		properties.put("javax.persistence.jdbc.user", getPropiedad("javax.persistence.jdbc.user"));
+		properties.put("javax.persistence.jdbc.password", getPropiedad("javax.persistence.jdbc.password"));			
 		return Persistence.createEntityManagerFactory(puName, properties);
 	}
 
 	public static EntityManagerFactory entityManagerFactoryContext() {
-		String puName = Config.getPropiedad("persistence.name");	
+		String puName = getPropiedad("persistence.name");	
 		return Persistence.createEntityManagerFactory(puName);
 	}
 	
