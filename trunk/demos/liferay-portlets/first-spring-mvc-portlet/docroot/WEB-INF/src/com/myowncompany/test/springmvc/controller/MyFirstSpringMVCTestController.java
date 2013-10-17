@@ -14,7 +14,9 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.vst.dao.UsuarioDAO;
 
+import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
 @Controller(value = "MyFirstSpringMVCTestController")
 @RequestMapping("VIEW")
 public class MyFirstSpringMVCTestController {
@@ -25,9 +27,12 @@ public class MyFirstSpringMVCTestController {
 	 * Since no request parameters are specified, therefore the default
 	 * render method will always be this method
 	 */
+	private UsuarioDAO usuarioDAO = getInstanceDAOLayer().getUsuarioDAOImpl();
+			
 	@RenderMapping
 	public String handleRenderRequest(RenderRequest request,RenderResponse response,Model model){
-		
+		log.info("getTodos");
+		log.info(usuarioDAO.getTodos());		
 		return "defaultRender";
 	}
 	
