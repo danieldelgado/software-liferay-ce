@@ -2,21 +2,19 @@ package com.vst.dao.impl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-//import org.springframework.stereotype.Repository;
-
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.DAO;
+//import org.springframework.stereotype.Repository;
 
-//@Repository("UsuarioDAO")
 public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 
-	private static final Logger logger = LoggerFactory.getLogger(UsuarioDAOImpl.class);
+//	private static final Logger logger = LoggerFactory.getLogger(UsuarioDAOImpl.class);
+	private static Log logger = LogFactoryUtil.getLog(UsuarioDAOImpl.class);
 	
 	@SuppressWarnings("unchecked")
-//	@Override
 	public Usuario buscarUsuario(Usuario usuario) {
 		if(usuario!=null){
 			sqlQuery = "select  new Usuario(u.id, u.userName, u.clave, u.nombre, u.apellido)  from Usuario u where u.userName=:userName";
@@ -33,7 +31,6 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-//	@Override
 	public Usuario buscarUsuario(String userName) {
 		if(userName!=null&&userName.length()>0){
 			sqlQuery = "select  new Usuario(u.id, u.userName, u.clave, u.nombre, u.apellido)  from Usuario u where u.userName=:userName";
@@ -49,9 +46,5 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 		return null;
 	}
 
-	@Override
-	public Boolean activo(String usuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }
