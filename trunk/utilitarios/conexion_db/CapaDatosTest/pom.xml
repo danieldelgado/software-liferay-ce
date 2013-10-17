@@ -117,8 +117,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
          <configuration>
           	<skip>true</skip>
 <!--        			 <outputDirectory>C:\Liferayga3\liferay-portal-tomcat\liferay-portal-6.1.2-ce-ga3\tomcat-7.0.40\lib\ext\</outputDirectory> -->
-       			 <outputDirectory>C:\Liferayga3\liferay-portal-tomcat\liferay-portal-6.1.2-ce-ga3\tomcat-7.0.40\lib\ext\</outputDirectory>
-<!--        			 C:\Users\ddelgado\Documents\workspace-liferay-demo\CapaDatosTest -->
+       			 <outputDirectory> C:\Liferayga3\liferay-portal-tomcat\liferay-portal-6.1.2-ce-ga3\tomcat-7.0.40\webapps\ROOT\WEB-INF\lib </outputDirectory>
       		</configuration>
         <executions>
           <execution>
