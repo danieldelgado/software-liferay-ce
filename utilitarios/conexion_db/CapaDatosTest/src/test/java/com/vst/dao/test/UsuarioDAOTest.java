@@ -15,7 +15,7 @@ public class UsuarioDAOTest {
 	
 	private static Log log = LogFactoryUtil.getLog(UsuarioDAOTest.class);	
 	private DAOLayer daoLayer = null;
-	int nb = 101 ;
+	int nb = 102 ;
 	@Before
 	public void beforeTest() {	
 		log.info("beforeTest nb:"+nb);
