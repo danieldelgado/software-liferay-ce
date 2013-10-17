@@ -87,7 +87,7 @@ public final class Config {
 				is = new FileInputStream(rutaArchivo);
 				// elArchivo = new File(rutaArchivo);
 			} else {
-				is = Config.class.getResourceAsStream("/hsd.properties");
+				is = Config.class.getResourceAsStream("/config.properties");
 			}
 			cargarConfiguracion(is);
 		} catch (IOException ioe) {

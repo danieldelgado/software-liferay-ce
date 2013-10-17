@@ -24,12 +24,10 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	protected Query q = null;
 
 	static {
-		emf = DAOConexionUtil.entityManagerFactoryContext();
+		emf = DAOConexionUtil.entityManagerFactory();
 		em = emf.createEntityManager();
 		log.info("createEntityManagerFactory");
 	}
-
-	
 	
 	public DAO() {
 		clazz = (Class<Entidad>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
