@@ -5,8 +5,10 @@
              version="1.0">
 
  <persistence-unit name="hsd_chat" transaction-type="RESOURCE_LOCAL" >
-<!--  <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-<!--     <non-jta-data-source>jdbc/chathsd</non-jta-data-source> -->
+	 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+<!-- 	 al usar el test comentar linea de  java:comp/env/jdbc/ y en el Dao cambiar de metodo entityManagerFactoryContext a entityManagerFactory -->
+	    <jta-data-source>java:comp/env/jdbc/chathsd</jta-data-source>
+<!-- 	 al usar el test comentar linea de  java:comp/env/jdbc/ y en el Dao cambiar de metodo entityManagerFactoryContext a entityManagerFactory -->
 		<properties>    						
 		<property name="hibernate.hbm2ddl.auto" value="validate" />	
 			<!--

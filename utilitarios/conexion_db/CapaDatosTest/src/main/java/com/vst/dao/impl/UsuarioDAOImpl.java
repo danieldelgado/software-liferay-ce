@@ -18,8 +18,9 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 	public Usuario buscarUsuario(Usuario usuario) {
 		if(usuario!=null){
 			sqlQuery = "select  new Usuario(u.id, u.userName, u.clave, u.nombre, u.apellido)  from Usuario u where u.userName=:userName";
-			q = em.createQuery(sqlQuery);
+			q = getEntityManager().createQuery(sqlQuery);
 			logger.info("buscando usuario por username "+usuario.getUserName());
+			logger.info("sqlQuery:"+sqlQuery);
 			q.setParameter("userName", usuario.getUserName());
 			List<Usuario> lst = q.getResultList();
 			if(lst!=null && lst.size()>0){
@@ -33,9 +34,11 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 	@SuppressWarnings("unchecked")
 	public Usuario buscarUsuario(String userName) {
 		if(userName!=null&&userName.length()>0){
+			logger.info("em.isOpen(): " + em.isOpen());
 			sqlQuery = "select  new Usuario(u.id, u.userName, u.clave, u.nombre, u.apellido)  from Usuario u where u.userName=:userName";
-			q = em.createQuery(sqlQuery);
+			q = getEntityManager().createQuery(sqlQuery);
 			logger.info("buscando usuario por username "+userName);
+			logger.info("sqlQuery:"+sqlQuery);
 			q.setParameter("userName",userName);
 			List<Usuario> lst = q.getResultList();
 			if(lst!=null && lst.size()>0){

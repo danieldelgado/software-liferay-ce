@@ -1,13 +1,11 @@
 package com.vst.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 //import com.liferay.portal.kernel.util.UnicodeFormatter;
 
 public class AsciiUtils {
 	
-	private static final Logger log = LoggerFactory.getLogger(AsciiUtils.class);
+//	private static final Logger log = LoggerFactory.getLogger(AsciiUtils.class);
 	
     private static final String PLAIN_ASCII =
       "AaEeIiOoUu"    // grave
@@ -35,7 +33,7 @@ public class AsciiUtils {
 
     // las letras con tildes las pone sin tildes
     public static String convertNonAscii(String s) {
-    	log.debug("convertNonAscii:"+s);
+//    	log.debug("convertNonAscii:"+s);
        if (s == null) return null;
        StringBuilder sb = new StringBuilder();
        int n = s.length();
@@ -54,7 +52,7 @@ public class AsciiUtils {
 
     // las letras con tildes las pone en unicode
     public static String _convertNonAscii(String s) {
-    	log.debug("_convertNonAscii:"+s);
+//    	log.debug("_convertNonAscii:"+s);
         if (s == null) return null;
         StringBuilder sb = new StringBuilder();
         int n = s.length();
