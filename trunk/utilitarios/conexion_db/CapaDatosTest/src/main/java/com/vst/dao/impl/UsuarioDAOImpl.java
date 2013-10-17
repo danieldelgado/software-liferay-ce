@@ -48,4 +48,10 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 		}		
 		return null;
 	}
+
+	@Override
+	public Boolean activo(String usuario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
