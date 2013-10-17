@@ -1,5 +1,7 @@
 package com.vst.dao.impl;
 
+import static com.vst.util.Util.printParameterQuery;
+
 import java.util.List;
 
 import com.liferay.portal.kernel.log.Log;
@@ -7,7 +9,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.DAO;
-import static com.vst.util.Util.printParameterQuery;
 
 public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 
