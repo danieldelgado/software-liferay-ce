@@ -7,6 +7,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.DAO;
+import static com.vst.util.Util.printParameterQuery;
 
 public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 
@@ -20,6 +21,7 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 			logger.info("buscando usuario por username "+usuario.getUserName());
 			logger.info("sqlQuery:"+sqlQuery);
 			q.setParameter("userName", usuario.getUserName());
+			printParameterQuery(q); 
 			List<Usuario> lst = q.getResultList();
 			if(lst!=null && lst.size()>0){
 				Usuario u = lst.get(0);
@@ -37,6 +39,7 @@ public class UsuarioDAOImpl extends DAO<Usuario> implements UsuarioDAO {
 			logger.info("buscando usuario por username "+userName);
 			logger.info("sqlQuery:"+sqlQuery);
 			q.setParameter("userName",userName);
+			printParameterQuery(q); 
 			List<Usuario> lst = q.getResultList();
 			if(lst!=null && lst.size()>0){
 				Usuario u = lst.get(0);
