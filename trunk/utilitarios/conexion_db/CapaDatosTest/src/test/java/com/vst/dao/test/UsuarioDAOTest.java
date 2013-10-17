@@ -19,7 +19,7 @@ public class UsuarioDAOTest {
 	
 	@Test
 	public void inserUsuario() {		
-		Usuario u = new Usuario("chat04", "chat04", "chat04", "chat04");
+		Usuario u = new Usuario("chat03", "chat03", "chat03", "chat03");
 		usuarioDAO.abrirConexion();
 		usuarioDAO.guardar(u);
 		usuarioDAO.commit();
@@ -29,7 +29,7 @@ public class UsuarioDAOTest {
 	
 	@Test
 	public void buscarUsuario() {		
-		Usuario u = usuarioDAO.buscarUsuario("chat04");
+		Usuario u = usuarioDAO.buscarUsuario("chat03");
 		System.out.println("u:"+u);
 		Assert.assertNotNull(u);
 	}

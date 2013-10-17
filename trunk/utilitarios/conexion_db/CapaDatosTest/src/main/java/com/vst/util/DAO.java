@@ -25,7 +25,7 @@ public class DAO<T extends Entidad>  implements IDAO<T> {
 		String puName = "hsd_chat";
 		Map<String, Object> properties = new HashMap<String, Object>();
 		properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-		properties.put("javax.persistence.jdbc.url", "jdbc:mysql://192.168.1.37:3306/chathsd");
+		properties.put("javax.persistence.jdbc.url", "jdbc:mysql://192.168.1.219:3306/chathsd");
 		properties.put("javax.persistence.jdbc.user", "root");
 		properties.put("javax.persistence.jdbc.password", "root");	
 		em = Persistence.createEntityManagerFactory(puName,properties).createEntityManager();
