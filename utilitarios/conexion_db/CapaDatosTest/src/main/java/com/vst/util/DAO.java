@@ -38,7 +38,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		log.info("getEntityManager em.isOpen():"+em.isOpen());
 		if(!em.isOpen()){
 			em = null;
-			em = emf.createEntityManager();
+			em = emf.createEntityManager();		
 		}	
 		return em;
 	}
@@ -57,7 +57,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		String sql = "SELECT e FROM " + nombre + " e";
 		return getEntityManager().createQuery(sql).getResultList();
 	}
-
+		
 	public void abrirConexion() throws Exception {
 		if(!em.isOpen()){
 			em = emf.createEntityManager();
@@ -65,11 +65,6 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		log.info("abrirConexion " + clazz.getSimpleName() + " createEntityManager:" + em);
 		entityTransaction = em.getTransaction();
 		entityTransaction.begin();
-	}
-
-	public void cerrarConexion() throws Exception {
-		log.info("cerrarConexion " + clazz.getSimpleName());
-		em.close();
 	}
 
 	public void commit() throws Exception {
@@ -80,6 +75,11 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	public void rollback() throws Exception {
 		log.info("rollback " + clazz.getSimpleName());
 		entityTransaction.rollback();
+	}
+
+	public void cerrarConexion() throws Exception {
+		log.info("cerrarConexion " + clazz.getSimpleName());
+		em.close();
 	}
 
 	public void guardar(T objeto) {
@@ -93,6 +93,17 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	public void eliminar(T objeto) {
 		if (objeto.getId() != null)
 			em.remove(objeto);
+	}
+	
+	public List<T> getTodosCampo(String campo, String value) {
+		Entity e = (Entity) clazz.getAnnotation(Entity.class);
+		String nombre = null;
+		if (e == null || e.name() == null || e.name().length() == 0)
+			nombre = clazz.getSimpleName();
+		else
+			nombre = e.name();
+		String sql = "SELECT e FROM " + nombre + " e where e."+campo+"=:value";
+		return getEntityManager().createQuery(sql).setParameter("value", value).getResultList();
 	}
 
 	public T getPorCodigo(String codigo) {
