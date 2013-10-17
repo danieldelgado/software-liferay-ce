@@ -61,6 +61,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		
 	public void abrirConexion() throws Exception {
 		if(!em.isOpen()){
+			em = null;
 			em = emf.createEntityManager();
 		}		
 		log.info("abrirConexion " + clazz.getSimpleName() + " createEntityManager:" + em);
@@ -71,8 +72,13 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	public void commit() throws Exception {
 		log.info("commit " + clazz.getSimpleName());
 		entityTransaction.commit();
+	}	
+	
+	public void flush() throws Exception {
+		log.info("flush " + clazz.getSimpleName());
+		em.flush();
 	}
-
+	
 	public void rollback() throws Exception {
 		log.info("rollback " + clazz.getSimpleName());
 		entityTransaction.rollback();
