@@ -2,19 +2,37 @@ package com.vst.util;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.persistence.Parameter;
+import javax.persistence.Query;
+
 import com.google.gson.Gson;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.vst.dao.impl.UsuarioDAOImpl;
 
 //import com.google.gson.Gson;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Util {
 
+	private static Log logger = LogFactoryUtil.getLog(UsuarioDAOImpl.class);
+	
 	private static 	Random r =new Random();
+	
+	public static void printParameterQuery(Query q){
+		logger.info("printParameterQuery");
+		List<Parameter<?>> listaParametros = Arrays.asList( q.getParameters().toArray( new Parameter<?>[0] ) );
+		for (Parameter<?> parameter : listaParametros) {
+			logger.info(parameter.getName());
+			logger.info(q.getParameterValue(parameter.getName()));
+		}		
+	}
 	
 	public static String getCodigo(Entidad entidad) {
 		Calendar c = Calendar.getInstance();
