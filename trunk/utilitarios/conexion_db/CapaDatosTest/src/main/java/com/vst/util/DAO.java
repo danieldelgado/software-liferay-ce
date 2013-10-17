@@ -26,7 +26,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	static {
 		emf = DAOConexionUtil.getEntityManagerFactory();
 		em = emf.createEntityManager();
-		log.info("createEntityManagerFactory");
+		log.info("static createEntityManagerFactory");
 	}
 	
 	public DAO() {
