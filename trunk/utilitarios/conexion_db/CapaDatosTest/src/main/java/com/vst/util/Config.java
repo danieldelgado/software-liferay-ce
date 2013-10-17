@@ -6,23 +6,20 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public final class Config {
 
-	private static final Logger log = LoggerFactory.getLogger(Config.class);
+//	private static final Logger log = LoggerFactory.getLogger(Config.class);
 	
 	private static Properties propiedades;
 
 	public static String getPropiedad(String propiedad) {
-		log.debug("getPropiedad:"+propiedad);
+//		log.debug("getPropiedad:"+propiedad);
 		cargarConfiguracion();
 		return propiedades.getProperty(propiedad);
 	}
 
 	public static int getPropiedadInt(String propiedad) {
-		log.debug("getPropiedadInt:"+propiedad);
+//		log.debug("getPropiedadInt:"+propiedad);
 		cargarConfiguracion();
 		String prop = propiedades.getProperty(propiedad);
 		int valor = 0;
@@ -35,12 +32,12 @@ public final class Config {
 	}
 
 	public static boolean getPropiedadBoolean(String propiedad) {
-		log.debug("getPropiedadBoolean:"+propiedad);
+//		log.debug("getPropiedadBoolean:"+propiedad);
 		return getPropiedadBoolean(propiedad, false);
 	}
 
 	public static boolean getPropiedadBoolean(String propiedad, boolean porDefecto) {
-		log.debug("getPropiedadBoolean:"+propiedad+" porDefecto:"+porDefecto);
+//		log.debug("getPropiedadBoolean:"+propiedad+" porDefecto:"+porDefecto);
 		cargarConfiguracion();
 		String prop = propiedades.getProperty(propiedad);
 		if (prop != null) {
@@ -56,7 +53,7 @@ public final class Config {
 	}
 
 	public static void cargarConfiguracion(InputStream archivo) {
-		log.debug("archivo:"+archivo);
+//		log.debug("archivo:"+archivo);
 		if (propiedades != null)
 			return;
 		if (archivo == null)
@@ -77,7 +74,7 @@ public final class Config {
 
 	@SuppressWarnings("resource")
 	public static void cargarConfiguracion(String archivo) {
-		log.debug("archivo:"+archivo);
+//		log.debug("archivo:"+archivo);
 		if (propiedades != null)
 			return;
 		String rutaArchivo = System.getProperty("chimera.configuracion");
@@ -99,7 +96,7 @@ public final class Config {
 	}
 
 	private static String interpolar(String key, int nivel) {
-		log.debug("interpolar key:"+key+" nivel:"+nivel);
+//		log.debug("interpolar key:"+key+" nivel:"+nivel);
 		String valor = propiedades.getProperty(key);
 		int desde = 0;
 		StringBuffer resultado = null;

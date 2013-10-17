@@ -7,25 +7,25 @@ import com.vst.dao.impl.UsuarioDAOImpl;
 
 public final class DAOLayer {
 
-	private final static Log logger = LogFactoryUtil.getLog(DAOLayer.class);	
+	private static Log log = LogFactoryUtil.getLog(DAOLayer.class);	
 	
 	private final static DAOLayer daoLayer = newInstanceDAOLayer();
 	private final static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-	
+		
 	private DAOLayer() {}
 	
 	private static DAOLayer newInstanceDAOLayer(){
-		logger.info("new DAOLayer:"+daoLayer);
+		log.info("newInstanceDAOLayer:");
 		return new DAOLayer();
 	}
 	
 	public static DAOLayer getInstanceDAOLayer(){
-		logger.info("obtener DAOLayer:"+daoLayer);
+		log.info("obtener DAOLayer:"+daoLayer);
 		return daoLayer;
 	}
 	
 	public UsuarioDAO getUsuarioDAOImpl(){
-		logger.info("obtener UsuarioDAO:"+usuarioDAO);
+		log.info("obtener UsuarioDAO:"+usuarioDAO);
 		return usuarioDAO;
 	}
 	

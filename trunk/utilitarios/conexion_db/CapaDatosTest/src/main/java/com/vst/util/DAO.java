@@ -1,43 +1,52 @@
 package com.vst.util;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 @SuppressWarnings("unchecked")
-public class DAO<T extends Entidad>  implements IDAO<T> {
+public class DAO<T extends Entidad> implements IDAO<T> {
 
+	private static Log log = LogFactoryUtil.getLog(DAO.class);
+	protected static EntityManagerFactory emf;
 	protected static EntityManager em;
-
+	protected static EntityTransaction entityTransaction;
 	private Class<Entidad> clazz;
-
 	protected String sqlQuery = null;
+	protected Query q = null;
 
-	protected Query q = null;	
+	static {
+		emf = DAOConexionUtil.entityManagerFactoryContext();
+		em = emf.createEntityManager();
+		log.info("createEntityManagerFactory");
+	}
+
 	
-	static{
-		String puName = "hsd_chat";
-		Map<String, Object> properties = new HashMap<String, Object>();
-		properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-		properties.put("javax.persistence.jdbc.url", "jdbc:mysql://192.168.1.219:3306/chathsd");
-		properties.put("javax.persistence.jdbc.user", "root");
-		properties.put("javax.persistence.jdbc.password", "root");	
-		em = Persistence.createEntityManagerFactory(puName,properties).createEntityManager();
-	}	
 	
 	public DAO() {
 		clazz = (Class<Entidad>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		
+		log.info("new DAO " + clazz.getSimpleName());
 	}
 
+	public EntityManager getEntityManager(){
+		log.info("getEntityManager em.isOpen():"+em.isOpen());
+		if(!em.isOpen()){
+			em = null;
+			em = emf.createEntityManager();
+		}	
+		return em;
+	}
+	
 	public T get(Integer id) {
-		return (T) em.find(clazz, id);
+		return (T) getEntityManager().find(clazz, id);
 	}
 
 	public List<T> getTodos() {
@@ -48,26 +57,35 @@ public class DAO<T extends Entidad>  implements IDAO<T> {
 		else
 			nombre = e.name();
 		String sql = "SELECT e FROM " + nombre + " e";
-		return em.createQuery(sql).getResultList();
+		return getEntityManager().createQuery(sql).getResultList();
 	}
 
-	public void abrirConexion() {
-		em.getTransaction().begin();
+	public void abrirConexion() throws Exception {
+		if(!em.isOpen()){
+			em = emf.createEntityManager();
+		}		
+		log.info("abrirConexion " + clazz.getSimpleName() + " createEntityManager:" + em);
+		entityTransaction = em.getTransaction();
+		entityTransaction.begin();
 	}
-	
-	public void cerrarConexion() {
+
+	public void cerrarConexion() throws Exception {
+		log.info("cerrarConexion " + clazz.getSimpleName());
 		em.close();
 	}
 
-	public void commit() {
-		em.getTransaction().commit();
+	public void commit() throws Exception {
+		log.info("commit " + clazz.getSimpleName());
+		entityTransaction.commit();
 	}
-	
-	public void rollback() {
-		em.getTransaction().rollback();
+
+	public void rollback() throws Exception {
+		log.info("rollback " + clazz.getSimpleName());
+		entityTransaction.rollback();
 	}
-	
+
 	public void guardar(T objeto) {
+		log.info("guardar " + clazz.getSimpleName());
 		if (objeto.getId() != null)
 			em.merge(objeto);
 		else
@@ -87,7 +105,7 @@ public class DAO<T extends Entidad>  implements IDAO<T> {
 		else
 			nombre = e.name();
 		String sql = "SELECT e FROM " + nombre + " e  where e.codigo = :codigo";
-		return (T) em.createQuery(sql).setParameter("codigo", codigo).getSingleResult();
+		return (T) getEntityManager().createQuery(sql).setParameter("codigo", codigo).getSingleResult();
 	}
 
 	public List<T> getTodosActivos() {
@@ -98,7 +116,7 @@ public class DAO<T extends Entidad>  implements IDAO<T> {
 		else
 			nombre = e.name();
 		String sql = "SELECT e FROM " + nombre + " e where e.activo = 'A'";
-		return em.createQuery(sql).getResultList();
+		return getEntityManager().createQuery(sql).getResultList();
 	}
 
 }

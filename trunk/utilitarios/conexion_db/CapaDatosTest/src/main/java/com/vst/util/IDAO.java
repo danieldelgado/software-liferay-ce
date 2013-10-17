@@ -16,10 +16,10 @@ public interface IDAO<T extends Entidad> {
 
 	public void eliminar(T objeto);
 
-	public void abrirConexion();
+	public void abrirConexion() throws Exception;
 	
-	public void cerrarConexion();
+	public void cerrarConexion() throws Exception;
 
-	public void commit() ;
+	public void commit()  throws Exception;
 
 }

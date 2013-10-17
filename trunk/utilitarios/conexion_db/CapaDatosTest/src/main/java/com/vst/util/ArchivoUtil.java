@@ -15,12 +15,9 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.sun.image.codec.jpeg.ImageFormatException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+//import com.sun.image.codec.jpeg.ImageFormatException;
+//import com.sun.image.codec.jpeg.JPEGCodec;
+//import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 /**
  * @author FMANDROSP
@@ -29,23 +26,23 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 @SuppressWarnings("restriction")
 public class ArchivoUtil {
 
-	private static final Logger log = LoggerFactory.getLogger(ArchivoUtil.class);
+//	private static final Logger log = LoggerFactory.getLogger(ArchivoUtil.class);
 
-	public static File enFile(String nombreArchivo, byte[] arreglo) throws FileNotFoundException, IOException {
-		log.debug("File nombreArchivo:" + nombreArchivo);
-		if (TextoUtil.contieneAlgo(nombreArchivo) && arreglo != null) {
-			File archivo = new File(nombreArchivo);
-			OutputStream flujoSalida;
-			flujoSalida = new FileOutputStream(archivo);
-			flujoSalida.write(arreglo);
-			flujoSalida.close();
-			return archivo;
-		}
-		return null;
-	}
+//	public static File enFile(String nombreArchivo, byte[] arreglo) throws FileNotFoundException, IOException {
+////		log.debug("File nombreArchivo:" + nombreArchivo);
+//		if (TextoUtil.contieneAlgo(nombreArchivo) && arreglo != null) {
+//			File archivo = new File(nombreArchivo);
+//			OutputStream flujoSalida;
+//			flujoSalida = new FileOutputStream(archivo);
+//			flujoSalida.write(arreglo);
+//			flujoSalida.close();
+//			return archivo;
+//		}
+//		return null;
+//	}
 
 	public static byte[] enArregloByte(File archivo) throws FileNotFoundException, IOException {
-		log.debug("byte[] archivo:" + archivo);
+//		log.debug("byte[] archivo:" + archivo);
 		if (archivo != null) {
 			InputStream flujoEntrada = new FileInputStream(archivo);
 			int longitud = (int) archivo.length();
@@ -57,14 +54,14 @@ public class ArchivoUtil {
 		return null;
 	}
 
-	public static byte[] cargarImage(String rutaImagen) throws ImageFormatException, IOException {
-		log.debug("byte[] cargarImage:" + rutaImagen);
-		BufferedImage cargaImagen = loadImage(rutaImagen);
-		return bufferedImageToByteArray(cargaImagen);
-	}
+//	public static byte[] cargarImage(String rutaImagen) throws ImageFormatException, IOException {
+////		log.debug("byte[] cargarImage:" + rutaImagen);
+//		BufferedImage cargaImagen = loadImage(rutaImagen);
+//		return bufferedImageToByteArray(cargaImagen);
+//	}
 
 	public static BufferedImage loadImage(String rutaImagen) throws IOException {
-		log.debug("BufferedImage loadImage:" + rutaImagen);
+//		log.debug("BufferedImage loadImage:" + rutaImagen);
 		BufferedImage bimg = null;
 		bimg = ImageIO.read(new File(rutaImagen));
 		// bimg = ImageIO.read(new File(new
@@ -78,16 +75,16 @@ public class ArchivoUtil {
 		return bimg;
 	}
 
-	public static byte[] bufferedImageToByteArray(BufferedImage img) throws ImageFormatException, IOException {
-		log.debug("BufferedImage img:" + img);
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(os);
-		encoder.encode(img);
-		return os.toByteArray();
-	}
+//	public static byte[] bufferedImageToByteArray(BufferedImage img) throws ImageFormatException, IOException {
+////		log.debug("BufferedImage img:" + img);
+//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+//		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(os);
+//		encoder.encode(img);
+//		return os.toByteArray();
+//	}
 
 	public static byte[] guardarImagen(byte[] fileBytes, String filename, String repositorio) throws IOException {
-		log.debug("BufferedImage filename:" + filename + " repositorio:" + repositorio + " fileBytes: " + fileBytes);
+//		log.debug("BufferedImage filename:" + filename + " repositorio:" + repositorio + " fileBytes: " + fileBytes);
 		filename = new File(filename).getName();
 		filename = repositorio + filename;
 		FileOutputStream fileOut = new FileOutputStream(filename);
@@ -98,7 +95,7 @@ public class ArchivoUtil {
 	}
 
 	public static String obtenerNombreDeFile(String filename) {
-		log.debug("BufferedImage obtenerNombreDeFile:" + filename);
+//		log.debug("BufferedImage obtenerNombreDeFile:" + filename);
 		return filename = new File(filename).getName();
 		/*
 		 * String nombreArchivoImagenDeBD = imagenFoto; //obetener el nombre del
