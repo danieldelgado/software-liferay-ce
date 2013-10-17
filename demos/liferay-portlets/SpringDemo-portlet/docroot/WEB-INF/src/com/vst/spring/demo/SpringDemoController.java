@@ -11,6 +11,10 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.vst.capa.dao.DAOLayer;
+import com.vst.dao.UsuarioDAO;
+import com.vst.dao.impl.UsuarioDAOImpl;
+import com.vst.dominio.Usuario;
 import com.vst.spring.service.SpringDemoService;
 
 /**
@@ -26,6 +30,9 @@ public class SpringDemoController  {
 	 * Since no request parameters are specified, therefore the default
 	 * render method will always be this method
 	 */
+	
+	UsuarioDAO usuarioDAO = null;
+	
 	@Autowired
 	SpringDemoService demoService;
 	
@@ -36,6 +43,14 @@ public class SpringDemoController  {
 		System.out.println(demoService.hello());
 //		HolaMundo a = new HolaMundo();
 //		a.ejectuta();
+		usuarioDAO = DAOLayer.getInstanceDAOLayer().getUsuarioDAOImpl();
+		Usuario u = new Usuario("chat10", "chat10", "chat10", "chat10");
+		System.out.println("u");
+		System.out.println(u);
+		usuarioDAO.abrirConexion();
+		usuarioDAO.guardar(u);
+		usuarioDAO.commit();
+		usuarioDAO.cerrarConexion();
 		return "view";
 	}
 	
