@@ -1,34 +1,44 @@
-package com.vst.capa.spring.bean;
-
-import java.util.Map;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-public class SpringDAOLayer {
-
-	private static Log log = LogFactoryUtil.getLog(SpringDAOLayer.class);	
-	private Map<String,String> indexEntityMap = null;
-	
-	public SpringDAOLayer() {
-		log.info(" cargando!!!!! SpringDAOLayer ");
-	}
-
-	public void completeInstance(){
-		log.info("init");
-		log.info(indexEntityMap);
-	}
-	
-	public Map<String,String> getIndexEntityMap() {
-		return indexEntityMap;
-	}
-
-	public void setIndexEntityMap(Map<String,String> indexEntityMap) {
-		log.info("indexEntityMap");
-		log.info(indexEntityMap);
-		this.indexEntityMap = indexEntityMap;
-	}
-	
-	
-
-}
+//package com.vst.capa.spring.bean;
+//
+//import java.util.Date;
+//
+//import com.liferay.portal.kernel.log.Log;
+//import com.liferay.portal.kernel.log.LogFactoryUtil;
+//import com.vst.dao.UsuarioDAO;
+//
+//public class SpringDAOLayer {
+//
+//	private static Log log = LogFactoryUtil.getLog(SpringDAOLayer.class);	
+//	private String portletSC;
+//	private UsuarioDAO usuarioDAO;
+//	
+//	
+//	public SpringDAOLayer() {
+//		log.info("startup SpringDAOLayer "+(new Date()));
+//	}
+//
+//	public void completeInstance(){
+//		log.info("Portlet "+portletSC+ " completeInstance "+(new Date()));
+//		if(usuarioDAO!=null){
+//			log.info("startup Bean usuarioDAO "+(new Date()));
+//		}
+//	}
+//	
+//	public String getPortletSC() {
+//		return portletSC;
+//	}
+//
+//	public void setPortletSC(String portletSC) {
+//		this.portletSC = portletSC;
+//	}
+//
+//	public UsuarioDAO getUsuarioDAO() {
+//		return usuarioDAO;
+//	}
+//
+//	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
+//		this.usuarioDAO = usuarioDAO;
+//	}
+//
+//
+//}

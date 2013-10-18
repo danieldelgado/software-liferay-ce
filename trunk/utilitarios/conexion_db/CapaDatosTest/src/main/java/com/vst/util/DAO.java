@@ -1,6 +1,9 @@
 package com.vst.util;
 
+import static com.vst.util.DAOConexionUtil.getEntityManagerFactory;
+
 import java.lang.reflect.ParameterizedType;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,7 +14,6 @@ import javax.persistence.Query;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import static com.vst.util.DAOConexionUtil.getEntityManagerFactory;
 
 @SuppressWarnings("unchecked")
 public class DAO<T extends Entidad> implements IDAO<T> {
@@ -21,29 +23,48 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	private static EntityManager em;
 	private static EntityTransaction entityTransaction;
 	private Class<Entidad> clazz;
+	private String portletSC;
 	protected String sqlQuery = null;
 	protected Query q = null;
 
 	static {
 		emf = getEntityManagerFactory();
-		em  = emf.createEntityManager();
+		em = emf.createEntityManager();
 		log.info("static createEntityManagerFactory");
 	}
-	
+
 	public DAO() {
 		clazz = (Class<Entidad>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-		log.info("new DAO " + clazz.getSimpleName());
+		log.info("startup new DAO " + clazz.getSimpleName() + " - " + (new Date()));
 	}
 
-	public EntityManager getEntityManager(){
-		log.info("getEntityManager em.isOpen():"+em.isOpen());
-		if(!em.isOpen()){
+	public void initDAO() {
+		log.info("Portlet " + portletSC + "context root completeInstance " + (new Date()));
+	}
+
+	public void closeDAO() {
+		log.info("Portlet " + portletSC + "context root closeDAO " + (new Date()));
+		if (!em.isOpen()) {
+			em.flush();
+			em.close();
+		}
+		emf = null;
+		em = null;
+		entityTransaction = null;
+		clazz = null;
+		sqlQuery = null;
+		q = null;
+	}
+
+	public EntityManager getEntityManager() {
+		log.info("getEntityManager em.isOpen():" + em.isOpen());
+		if (!em.isOpen()) {
 			em = null;
-			em = emf.createEntityManager();		
-		}	
+			em = emf.createEntityManager();
+		}
 		return em;
 	}
-	
+
 	public T get(Integer id) {
 		return (T) getEntityManager().find(clazz, id);
 	}
@@ -58,12 +79,12 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		String sql = "SELECT e FROM " + nombre + " e";
 		return getEntityManager().createQuery(sql).getResultList();
 	}
-		
+
 	public void abrirConexion() throws Exception {
-		if(!em.isOpen()){
+		if (!em.isOpen()) {
 			em = null;
 			em = emf.createEntityManager();
-		}		
+		}
 		log.info("abrirConexion " + clazz.getSimpleName() + " createEntityManager:" + em);
 		entityTransaction = em.getTransaction();
 		entityTransaction.begin();
@@ -72,13 +93,13 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	public void commit() throws Exception {
 		log.info("commit " + clazz.getSimpleName());
 		entityTransaction.commit();
-	}	
-	
+	}
+
 	public void flush() throws Exception {
 		log.info("flush " + clazz.getSimpleName());
 		em.flush();
 	}
-	
+
 	public void rollback() throws Exception {
 		log.info("rollback " + clazz.getSimpleName());
 		entityTransaction.rollback();
@@ -101,7 +122,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 		if (objeto.getId() != null)
 			em.remove(objeto);
 	}
-	
+
 	public List<T> getTodosCampo(String campo, String value) {
 		Entity e = (Entity) clazz.getAnnotation(Entity.class);
 		String nombre = null;
@@ -109,7 +130,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 			nombre = clazz.getSimpleName();
 		else
 			nombre = e.name();
-		String sql = "SELECT e FROM " + nombre + " e where e."+campo+"=:value";
+		String sql = "SELECT e FROM " + nombre + " e where e." + campo + "=:value";
 		return getEntityManager().createQuery(sql).setParameter("value", value).getResultList();
 	}
 
@@ -133,6 +154,14 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 			nombre = e.name();
 		String sql = "SELECT e FROM " + nombre + " e where e.activo = 'A'";
 		return getEntityManager().createQuery(sql).getResultList();
+	}
+
+	public String getPortletSC() {
+		return portletSC;
+	}
+
+	public void setPortletSC(String portletSC) {
+		this.portletSC = portletSC;
 	}
 
 }
