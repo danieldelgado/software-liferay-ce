@@ -2,10 +2,12 @@ package com.vst.spring.service;
 
 import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.vst.capa.spring.bean.SpringDAOLayer;
 import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.TraductorDeExcepciones;
@@ -19,29 +21,33 @@ import com.vst.util.Util;
 public class SpringDemoServiceImpl implements SpringDemoService {
 
 	private static Log log = LogFactoryUtil.getLog(SpringDemoServiceImpl.class);
-
+		
 	UsuarioDAO usuarioDAO = getInstanceDAOLayer().getUsuarioDAOImpl();
+
+	@Autowired
+	private SpringDAOLayer springDAOLayer;
 	
 	@Override
 	public String hello() {
+		System.out.println("hello springDAOLayer:"+springDAOLayer);
 		int nb = 100 ;
 		nb = Util.random();
 		log.info(" SpringDemoServiceImpl ");
 		
-		Usuario u = new Usuario("chat"+nb, "chat"+nb, "chat"+nb, "chat"+nb);
+//		Usuario u = new Usuario("chat"+nb, "chat"+nb, "chat"+nb, "chat"+nb);
 		try {
 			log.info("abrir conexion");
-			usuarioDAO.abrirConexion();
-			usuarioDAO.guardar(u);
-			usuarioDAO.commit();	
-			log.info("commit");
-			usuarioDAO.cerrarConexion();
+//			usuarioDAO.abrirConexion();
+//			usuarioDAO.guardar(u);
+//			usuarioDAO.commit();	
+//			log.info("commit");
+//			usuarioDAO.cerrarConexion();
 			log.info("cerrar conexion");
 		} catch (Exception e) {
 			TraductorDeExcepciones.traducir(e.getMessage(), e);
 		}
-		u = usuarioDAO.buscarUsuario("chat"+nb);
-		log.info("Usuario:"+u.getId());
+//		u = usuarioDAO.buscarUsuario("chat"+nb);
+//		log.info("Usuario:"+u.getId());
 		
 		
 		
