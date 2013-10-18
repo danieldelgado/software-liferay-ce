@@ -20,6 +20,11 @@ import com.vst.spring.service.SpringDemoService;
 /**
  * Portlet implementation class SpringDemoController
  */
+
+//http://www.opensource-techblog.com/2012/11/how-to-create-friendly-url-for-liferay.html
+//http://loongest.com/liferay/liferay-friendly-url-mapper/
+
+
 @Controller
 @RequestMapping("VIEW")
 public class SpringDemoController {
