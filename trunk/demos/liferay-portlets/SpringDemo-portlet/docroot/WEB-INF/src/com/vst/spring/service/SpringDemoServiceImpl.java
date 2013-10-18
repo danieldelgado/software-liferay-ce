@@ -1,5 +1,7 @@
 package com.vst.spring.service;
 
+import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
+
 import org.springframework.stereotype.Service;
 
 import com.liferay.portal.kernel.log.Log;
@@ -8,7 +10,6 @@ import com.vst.dao.UsuarioDAO;
 import com.vst.dominio.Usuario;
 import com.vst.util.TraductorDeExcepciones;
 import com.vst.util.Util;
-import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
 
 /**
  * Portlet implementation class SpringDemoController

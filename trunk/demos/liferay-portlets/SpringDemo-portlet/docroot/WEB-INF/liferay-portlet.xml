@@ -6,7 +6,10 @@
 	<portlet>
 		<portlet-name>spring demo controller</portlet-name>
 		<icon>/icon.png</icon>
-		<instanceable>false</instanceable>
+		<friendly-url-mapper-class>com.vst.spring.friendlyUrl.FriendlierFriendlyURLMapper</friendly-url-mapper-class>
+		<friendly-url-mapping>submit-name</friendly-url-mapping>
+		<friendly-url-routes>com/vst/spring/friendlyUrl/friendlier-friendly-url-routes.xml</friendly-url-routes>
+		<instanceable>true</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
