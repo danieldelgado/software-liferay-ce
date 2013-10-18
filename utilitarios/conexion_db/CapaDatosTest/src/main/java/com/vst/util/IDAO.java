@@ -22,4 +22,8 @@ public interface IDAO<T extends Entidad> {
 
 	public void commit()  throws Exception;
 
+	public void initDAO();
+
+	public void closeDAO();
+	
 }
