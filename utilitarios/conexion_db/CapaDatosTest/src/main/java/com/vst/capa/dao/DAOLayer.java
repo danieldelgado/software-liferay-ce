@@ -2,7 +2,9 @@ package com.vst.capa.dao;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.vst.dao.DispositivoMovilDAO;
 import com.vst.dao.UsuarioDAO;
+import com.vst.dao.impl.DispositivoMovilDAOImpl;
 import com.vst.dao.impl.UsuarioDAOImpl;
 
 public final class DAOLayer {
@@ -11,7 +13,8 @@ public final class DAOLayer {
 	
 	private final static DAOLayer daoLayer = newInstanceDAOLayer();
 	private final static UsuarioDAO usuarioDAO = new UsuarioDAOImpl();
-		
+	private final static DispositivoMovilDAO dispositivoMovilDAO = new DispositivoMovilDAOImpl();
+	
 	private DAOLayer() {}
 	
 	private static DAOLayer newInstanceDAOLayer(){
@@ -28,6 +31,11 @@ public final class DAOLayer {
 		log.info("getUsuarioDAOImpl UsuarioDAO:"+usuarioDAO);
 		return usuarioDAO;
 	}
+
+	public static DispositivoMovilDAO getDispositivomovildao() {
+		return dispositivoMovilDAO;
+	}
+
 	
 	
 
