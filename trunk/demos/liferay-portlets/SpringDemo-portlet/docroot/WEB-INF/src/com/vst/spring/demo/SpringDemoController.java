@@ -4,24 +4,17 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.util.PortalUtil;
-import com.vst.capa.dao.DAOLayer;
-import com.vst.capa.spring.bean.SpringDAOLayer;
-import com.vst.dao.UsuarioDAO;
 import com.vst.spring.service.SpringDemoService;
 
 /**
@@ -44,7 +37,7 @@ public class SpringDemoController {
 	 */
 
 	@Autowired
-	SpringDemoService demoService;
+	private SpringDemoService demoService;
 
 	
 	
