@@ -24,4 +24,10 @@
 		<property name="suffix" value=".jsp" />
 		<property name="order" value="1" />
 	</bean>
+	
+	<bean id="usuarioDAO" class="com.vst.dao.impl.UsuarioDAOImpl" init-method="initDAO" destroy-method="closeDAO" >
+		<property name="portletSC" value="first-spring-mvc-portlet"> </property>	
+	</bean>
+	
+	
 </beans>	
