@@ -39,11 +39,11 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	}
 
 	public void initDAO() {
-		log.info("Portlet " + portletSC + "context root completeInstance " + (new Date()));
+		log.info("Portlet " + portletSC + "context root " + clazz.getSimpleName() + " completeInstance " + (new Date()));
 	}
 
 	public void closeDAO() {
-		log.info("Portlet " + portletSC + "context root closeDAO " + (new Date()));
+		log.info("Portlet " + portletSC + "context root " + clazz.getSimpleName() + " closeDAO " + (new Date()));
 		if (!em.isOpen()) {
 			em.flush();
 			em.close();
