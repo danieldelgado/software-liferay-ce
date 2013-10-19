@@ -5,6 +5,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.vst.dao.UsuarioDAO;
-
-import static com.vst.capa.dao.DAOLayer.getInstanceDAOLayer;
 @Controller(value = "MyFirstSpringMVCTestController")
 @RequestMapping("VIEW")
 public class MyFirstSpringMVCTestController {
@@ -27,8 +26,10 @@ public class MyFirstSpringMVCTestController {
 	 * Since no request parameters are specified, therefore the default
 	 * render method will always be this method
 	 */
-	private UsuarioDAO usuarioDAO = getInstanceDAOLayer().getUsuarioDAOImpl();
 			
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
 	@RenderMapping
 	public String handleRenderRequest(RenderRequest request,RenderResponse response,Model model){
 		log.info("getTodos");
