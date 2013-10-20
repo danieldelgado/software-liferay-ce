@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+#parse ($init)
+#parse ("$full_templates_path/init.vm")
+<html lang="$w3c_language_id">
+
+<head>
+	<title>$the_title</title>
+	$theme.include($top_head_include)
+</head>
+
+<body leftmargin="0" topmargin="0"
+	style="background-repeat: repeat-x; background-position: top"
+	background="/gtelcom-theme/images/gtelcom/bg.jpg" bgcolor="#F3F3F3"
+	marginheight="0" marginwidth="0">
+	
+#if ($is_signed_in)
+	#dockbar()
+#end
+
+
+
+	#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+		
+		
+		
+		
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+</body>
+
+</html>
