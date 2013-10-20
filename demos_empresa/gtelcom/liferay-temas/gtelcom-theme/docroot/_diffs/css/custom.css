@@ -1,0 +1,121 @@
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+td {
+	text-align: left;
+	vertical-align: top;
+	font-family: Arial;
+	font-size: 11px;
+	width: 180px;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+.t11 {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+}
+
+body {
+	margin: 0px;
+	padding: 0px
+}
+
+style1 {
+	Color: #FF6600
+}
+
+style2 {
+	Color: #666666
+}
+
+#rol {
+	background-image: url(../images/gtelcom/m1r.jpg);
+	cursor: hand
+}
+
+#bg {
+	background-image: url(../images/gtelcom/m1.jpg)
+}
+
+#rol2 {
+	background-image: url(../images/gtelcom/m2r.jpg);
+	cursor: hand
+}
+
+#bg2 {
+	background-image: url(../images/gtelcom/m2.jpg)
+}
+
+#rol3 {
+	background-image: url(../images/gtelcom/m3r.jpg);
+	cursor: hand
+}
+
+#bg3 {
+	background-image: url(../images/gtelcom/m3.jpg)
+}
+
+#rol4 {
+	background-image: url(../images/gtelcom/m4r.jpg);
+	cursor: hand
+}
+
+#bg4 {
+	background-image: url(../images/gtelcom/m4.jpg)
+}
+
+#rol5 {
+	background-image: url(../images/gtelcom/m5r.jpg);
+	cursor: hand
+}
+
+#bg5 {
+	background-image: url(../images/gtelcom/m5.jpg)
+}
+
+#rol6 {
+	background-image: url(../images/gtelcom/m6r.jpg);
+	cursor: hand
+}
+
+#bg6 {
+	background-image: url(../images/gtelcom/m6.jpg)
+}
+
+.style1 {
+	color: #666666
+}
+
+.style3 {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.style4 {
+	
+}
+
+a:link {
+	text-decoration: none;
+	font-size: x-small;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #333333;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #333333;
+}
+
+a:active {
+	text-decoration: none;
+	color: #333333;
+}
