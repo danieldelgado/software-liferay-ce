@@ -8,5 +8,10 @@
 			<wap-template-path>/columns_1_3.wap.tpl</wap-template-path>
 			<thumbnail-path>/columns_1_3.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="colmns1131" name="colmns-1-1-3-1">
+			<template-path>/colmns1131.tpl</template-path>
+			<wap-template-path>/colmns1131.wap.tpl</wap-template-path>
+			<thumbnail-path>/colmns1131.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
