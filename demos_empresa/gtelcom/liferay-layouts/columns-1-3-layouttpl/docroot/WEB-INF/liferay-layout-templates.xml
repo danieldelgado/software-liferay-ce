@@ -13,5 +13,10 @@
 			<wap-template-path>/colmns1131.wap.tpl</wap-template-path>
 			<thumbnail-path>/colmns1131.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="columns1111" name="columns-1-1-1-1">
+			<template-path>/columns1111.tpl</template-path>
+			<wap-template-path>/columns1111.wap.tpl</wap-template-path>
+			<thumbnail-path>/columns1111.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
