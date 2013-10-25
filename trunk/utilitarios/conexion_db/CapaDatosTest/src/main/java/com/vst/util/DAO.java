@@ -30,7 +30,7 @@ public class DAO<T extends Entidad> implements IDAO<T> {
 	static {
 		emf = getEntityManagerFactory();
 		em = emf.createEntityManager();
-		log.info("static createEntityManagerFactory");
+		log.info("DAO static createEntityManagerFactory");
 	}
 
 	public DAO() {
